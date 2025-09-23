@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        /* Target & Modules */
+        "target": "ES2020",
+        "module": "ESNext",
+        "lib": [
+            "ES2020",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        /* Class fields */
+        "useDefineForClassFields": true,
+        /* Module Resolution */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        /* Emit */
+        "noEmit": true,
+        /* Strictness & Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        /* Include vite types */
+        "types": [
+            "vue",
+            "vite/client",
+        ]
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.vue"
+    ],
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
+}
