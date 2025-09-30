@@ -1,9 +1,9 @@
 import {
     Maskito,
     maskitoTransform,
+    type MaskitoElement,
     type MaskitoMask,
     type MaskitoOptions,
-    type MaskitoElement,
 } from "@maskito/core";
 import {
     maskitoNumberOptionsGenerator,

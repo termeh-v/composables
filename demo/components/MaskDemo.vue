@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, watch, useTemplateRef } from "vue";
-import { useMask, patternMask, numericMask } from "../../src";
+import { ref, useTemplateRef, watch } from "vue";
+import { numericMask, patternMask, useMask } from "../../src";
 
 // Raw mask example
 const maskPattern = ref("(###) ###-####");

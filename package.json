@@ -1,7 +1,7 @@
 {
     "type": "module",
     "license": "ISC",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "@termeh-v/composables",
     "description": "Reusable Vue 3 composables for common development tasks.",
     "sideEffects": false,
@@ -10,9 +10,9 @@
     "types": "./dist/composables.d.ts",
     "exports": {
         ".": {
+            "types": "./dist/composables.d.ts",
             "import": "./dist/composables.es.js",
-            "require": "./dist/composables.cjs.js",
-            "types": "./dist/composables.d.ts"
+            "require": "./dist/composables.cjs.js"
         }
     },
     "files": [
@@ -39,7 +39,7 @@
         "prepare": "npm run build"
     },
     "devDependencies": {
-        "@types/node": "^24.5.2",
+        "@types/node": "^24.6.0",
         "@vitejs/plugin-vue": "^6.0.1",
         "typescript": "^5.9.2",
         "vite": "^7.1.7",
@@ -49,7 +49,7 @@
     "peerDependencies": {
         "@maskito/core": "^3.11.0",
         "@maskito/kit": "^3.11.0",
-        "@termeh-v/utils": "^1.0.0",
+        "@termeh-v/utils": "^1.0.2",
         "@vueuse/core": "^13.9.0",
         "vue": "^3.5.0"
     }

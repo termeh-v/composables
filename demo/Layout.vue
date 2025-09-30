@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import TimerDemo from "./components/TimerDemo.vue";
 import CountdownDemo from "./components/CountdownDemo.vue";
 import EmptySlotDemo from "./components/EmptySlotDemo.vue";
+import FilterDemo from "./components/FilterDemo.vue";
+import InputComposablesDemo from "./components/InputComposablesDemo.vue";
+import MaskDemo from "./components/MaskDemo.vue";
 import MediaQueriesDemo from "./components/MediaQueriesDemo.vue";
 import ShortcutDemo from "./components/ShortcutDemo.vue";
 import SignerDemo from "./components/SignerDemo.vue";
-import FilterDemo from "./components/FilterDemo.vue";
-import MaskDemo from "./components/MaskDemo.vue";
-import InputComposablesDemo from "./components/InputComposablesDemo.vue";
+import TimerDemo from "./components/TimerDemo.vue";
 </script>
 
 <template>

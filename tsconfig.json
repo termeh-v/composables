@@ -23,6 +23,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
+        "verbatimModuleSyntax": true,
         /* Include vite types */
         "types": [
             "vue",

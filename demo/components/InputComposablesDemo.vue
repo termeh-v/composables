@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useAutoFocus, useAutoSelect, useAutoClear } from "../../src";
+import { useAutoClear, useAutoFocus, useAutoSelect } from "../../src";
 
 const focusRef = ref(null);
 const selectRef = ref(null);

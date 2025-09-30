@@ -1,5 +1,5 @@
 import { toHMS } from "@termeh-v/utils";
-import { ref, computed } from "vue";
+import { computed, ref } from "vue";
 
 /**
  * Vue composable for a countdown timer.

@@ -1,12 +1,12 @@
 import {
-    isString,
-    isNumber,
-    isNumeric,
     isArray,
     isCompoundType,
+    isNumber,
+    isNumeric,
     isObject,
-    type PrimitiveType,
+    isString,
     type CompoundType,
+    type PrimitiveType,
 } from "@termeh-v/utils";
 import { computed, reactive } from "vue";
 import { useSigner } from "./useSigner";
