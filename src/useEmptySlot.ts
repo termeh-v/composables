@@ -4,7 +4,7 @@ import {
     Fragment,
     ref,
     Text,
-    type Slot,
+    useSlots,
     type VNode,
     type VNodeChild,
 } from "vue";
@@ -17,10 +17,12 @@ import {
  *
  * @param slot - Optional Vue slot to check.
  * @returns An object with:
- * - `isEmpty`: computed boolean indicating if the slot is empty.
  * - `hasError`: computed boolean indicating if an error occurred during evaluation.
+ * - `isEmpty`: computed boolean indicating if the slot is empty.
+ * - `hasErrorOrEmpty`: computed boolean indicating if an error occurred or slot is empty.
  */
-export function useEmptySlot(slot?: Slot) {
+export function useEmptySlot(name: string) {
+    const slots = useSlots();
     const error = ref<Error | null>(null);
 
     /**
@@ -32,40 +34,54 @@ export function useEmptySlot(slot?: Slot) {
         if (node.type === Comment) return true;
 
         if (node.type === Text) {
-            return node.children == null || !String(node.children).trim();
+            if (node.children == null) return true;
+
+            if (typeof node.children === "string") {
+                return !node.children.trim();
+            }
+
+            return false;
         }
 
         if (node.type === Fragment) {
             const children = node.children as VNodeChild;
-            if (!children) return true;
+
+            if (children == null) return true;
+
+            if (typeof children === "string") return !children.trim();
 
             if (Array.isArray(children)) {
                 return !children.some((child) => {
-                    if (typeof child === "string" || child == null) {
-                        return !!String(child).trim();
-                    }
-                    return !isVNodeEmpty(child as VNode);
+                    if (child == null) return false;
+
+                    if (typeof child === "string")
+                        return child.trim().length > 0;
+
+                    if (typeof child === "object")
+                        return !isVNodeEmpty(child as VNode);
+
+                    return true;
                 });
             }
 
-            if (typeof children === "string") {
-                return !children.trim();
-            }
-            if (children && typeof children === "object") {
+            if (typeof children === "object") {
                 return isVNodeEmpty(children as VNode);
             }
-            return true;
+
+            return false;
         }
 
         return false;
     };
 
+    const hasError = computed(() => !!error.value);
+
     const isEmpty = computed(() => {
         error.value = null;
-        if (!slot) return true;
+        if (!slots[name]) return true;
 
         try {
-            const nodes: VNode[] | undefined = slot();
+            const nodes: VNode[] | undefined = slots[name]?.();
             if (!nodes || !Array.isArray(nodes) || nodes.length === 0)
                 return true;
             return !nodes.some((node) => !isVNodeEmpty(node));
@@ -76,7 +92,7 @@ export function useEmptySlot(slot?: Slot) {
         }
     });
 
-    const hasError = computed(() => !!error.value);
+    const hasErrorOrEmpty = computed(() => hasError.value || isEmpty.value);
 
-    return { isEmpty, hasError };
+    return { hasError, isEmpty, hasErrorOrEmpty };
 }
