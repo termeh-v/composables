@@ -4,13 +4,15 @@ import { useScroll } from "../../src";
 
 const elSize = ref(100);
 const container = useTemplateRef("container");
-const { hasScrollTop, hasScrollBottom, hasScrollLeft, hasScrollRight } =
+const { x, y, hasScrollTop, hasScrollBottom, hasScrollLeft, hasScrollRight } =
     useScroll(container);
 </script>
 
 <template>
     <div>
         <h2>useScroll Demo</h2>
+        <div>Scroll X: {{ x }}</div>
+        <div>Scroll Y: {{ y }}</div>
         <div>Scroll Top: {{ hasScrollTop }}</div>
         <div>Scroll Bottom: {{ hasScrollBottom }}</div>
         <div>Scroll Left: {{ hasScrollLeft }}</div>

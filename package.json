@@ -1,7 +1,7 @@
 {
     "type": "module",
     "license": "ISC",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "name": "@termeh-v/composables",
     "description": "Reusable Vue 3 composables for common development tasks.",
     "sideEffects": false,

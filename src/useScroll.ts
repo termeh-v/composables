@@ -58,6 +58,10 @@ export function useScroll(
     const atLeft = ref(true);
     const atRight = ref(true);
 
+    // Raw state variables for scroll coordinates
+    const scrollX = ref(0);
+    const scrollY = ref(0);
+
     // Internal raw state variables for scrollability
     const scrollableX = ref(false);
     const scrollableY = ref(false);
@@ -82,6 +86,10 @@ export function useScroll(
             scrollWidth,
             clientWidth,
         } = el;
+
+        // Update Scroll Coordinates
+        scrollY.value = scrollTop;
+        scrollX.value = scrollLeft;
 
         // Vertical (Y-axis) calculations
         scrollableY.value = scrollHeight > clientHeight;
@@ -149,31 +157,37 @@ export function useScroll(
         /** Manually triggers a recalculation of the scroll state. */
         measure,
 
-        // Scrollability
+        // --- Scroll Coordinates ---
+        /** Reactive number indicating the current horizontal scroll offset (scrollLeft). */
+        x: computed(() => scrollX.value),
+        /** Reactive number indicating the current vertical scroll offset (scrollTop). */
+        y: computed(() => scrollY.value),
+
+        // --- Scrollability ---
         /** Reactive boolean indicating if the content is vertically scrollable. */
         isScrollableY: computed(() => scrollableY.value),
         /** Reactive boolean indicating if the content is horizontally scrollable. */
         isScrollableX: computed(() => scrollableX.value),
 
-        // Arrived Status (Logically checks if scrollable AND at the edge)
-        /** Reactive boolean indicating if the scroll is at or near the top AND is scrollable. */
+        // --- Has Scroll Status (Content Exists) ---
+        /** Reactive boolean indicating if the scroll is not at the top AND is scrollable (i.e., content exists above). */
         hasScrollTop: computed(() => scrollableY.value && !atTop.value),
-        /** Reactive boolean indicating if the scroll is at or near the bottom AND is scrollable. */
+        /** Reactive boolean indicating if the scroll is not at the bottom AND is scrollable (i.e., content exists below). */
         hasScrollBottom: computed(() => scrollableY.value && !atBottom.value),
 
-        // Arrived Status (Primary check: True if scrollable AND at edge, or if NOT scrollable)
+        // --- Arrived Status (Primary Check) ---
         /** Reactive boolean indicating if the scroll is at or near the top (within threshold). True if not scrollable. */
         isAtTop: computed(() => (scrollableY.value ? atTop.value : true)),
         /** Reactive boolean indicating if the scroll is at or near the bottom (within threshold). True if not scrollable. */
         isAtBottom: computed(() => (scrollableY.value ? atBottom.value : true)),
 
-        // Arrived Status (Logically checks if scrollable AND at the edge)
-        /** Reactive boolean indicating if the scroll is at or near the left edge AND is scrollable. */
+        // --- Has Scroll Status (Content Exists) ---
+        /** Reactive boolean indicating if the scroll is not at the left edge AND is scrollable (i.e., content exists to the left). */
         hasScrollLeft: computed(() => scrollableX.value && !atLeft.value),
-        /** Reactive boolean indicating if the scroll is at or near the right edge AND is scrollable. */
+        /** Reactive boolean indicating if the scroll is not at the right edge AND is scrollable (i.e., content exists to the right). */
         hasScrollRight: computed(() => scrollableX.value && !atRight.value),
 
-        // Arrived Status (Primary check: True if scrollable AND at edge, or if NOT scrollable)
+        // --- Arrived Status (Primary Check) ---
         /** Reactive boolean indicating if the scroll is at or near the left edge (within threshold). True if not scrollable. */
         isAtLeft: computed(() => (scrollableX.value ? atLeft.value : true)),
         /** Reactive boolean indicating if the scroll is at or near the right edge (within threshold). True if not scrollable. */
